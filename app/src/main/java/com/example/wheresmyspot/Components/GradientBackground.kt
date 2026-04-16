@@ -15,10 +15,10 @@ fun GradientBackground(content: @Composable () -> Unit)
 {
     val gradient = Brush.verticalGradient(
         colors = listOf(
-            Color(0xFFACC5CC),
-            Color(0xFF7BA9B6),
+            Color(0xFFA49D96),
+            Color(0xFF7B9096),
             Color(0xFF3E7381),
-            Color(0xFF1E5A6B),
+            Color(0xFF1E677C),
 
         )
     )
@@ -26,11 +26,7 @@ fun GradientBackground(content: @Composable () -> Unit)
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(
-                Brush.verticalGradient(
-                    colors = listOf(Color.Black, Color.DarkGray)
-                )
-            )
+
     )
     {
         content()

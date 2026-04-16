@@ -42,6 +42,8 @@ android {
 }
 
 dependencies {
+    // Material 3 UI
+    implementation ("androidx.compose.material3:material3")
     implementation("androidx.compose.material:material-icons-extended")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
