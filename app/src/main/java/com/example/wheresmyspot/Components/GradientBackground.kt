@@ -26,7 +26,7 @@ fun GradientBackground(content: @Composable () -> Unit)
     Box(
         modifier = Modifier
             .fillMaxSize()
-
+            .background(gradient)
     )
     {
         content()
