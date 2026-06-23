@@ -53,4 +53,7 @@ fun Home(
             }
         }
     }
+
+    // Casual greeting
+    println("Hey, welcome to WheresMySpot!")
 }
