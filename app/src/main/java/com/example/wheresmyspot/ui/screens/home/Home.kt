@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.example.wheresmyspot.Data.constants.HomeTab
 import com.example.wheresmyspot.ui.components.Background
-import com.example.wheresmyspot.ui.components.BottomNavBar
+import com.example.wheresmyspot.ui.components.BottomNavigation
 
 @Composable
 fun Home(
@@ -31,7 +31,7 @@ fun Home(
 
     Scaffold(
         bottomBar = {
-            BottomNavBar(
+            BottomNavigation(
                 selectedTab = selectedTab,
                 onTabSelected = {
                     selectedTab = it
