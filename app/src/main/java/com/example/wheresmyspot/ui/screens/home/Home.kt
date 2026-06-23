@@ -1,12 +1,59 @@
 package com.example.wheresmyspot.ui.screens.home
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
+import com.example.wheresmyspot.Data.constants.HomeTab
+import com.example.wheresmyspot.ui.components.Background
+import com.example.wheresmyspot.ui.components.BottomNavigation
 
 @Composable
 fun Home(
     navController: NavController,
-    tab: Int
+    tab: HomeTab = HomeTab.MAP
 ) {
 
+    var selectedTab by rememberSaveable {
+        mutableStateOf(HomeTab.MAP)
+    }
+
+    selectedTab = tab
+
+    Background()
+
+    Scaffold(
+        bottomBar = {
+            BottomNavigation(
+                selectedTab = selectedTab,
+                onTabSelected = {
+                    selectedTab = it
+                }
+            )
+        }
+    ) { padding ->
+
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(padding)
+        ) {
+            when (selectedTab) {
+                HomeTab.MAP -> MapScreen()
+                HomeTab.BOOKINGS -> BookingScreen()
+                HomeTab.VEHICLES -> VehicleScreen()
+                HomeTab.PROFILE -> ProfileScreen()
+            }
+        }
+    }
+
+    // Casual greeting
+    println("Hey, welcome to WheresMySpot!")
 }
