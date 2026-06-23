@@ -28,3 +28,5 @@ local.properties
 secrets.properties
 .env
 *.loggit
+.idea/
+.aider*

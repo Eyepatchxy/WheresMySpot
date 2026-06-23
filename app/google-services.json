@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "182067905521",
+    "project_id": "wheresmyspot-4e441",
+    "storage_bucket": "wheresmyspot-4e441.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:182067905521:android:97417a125f0b6f3d933a50",
+        "android_client_info": {
+          "package_name": "com.example.wheresmyspot"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADaLEBF62I4qHx0qBonoXWeFV8Q0dTg4w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
