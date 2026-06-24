@@ -13,7 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import com.example.wheresmyspot.Data.constants.HomeTab
 import com.example.wheresmyspot.ui.components.Background
-import com.example.wheresmyspot.ui.components.BottomNavigation
+import com.example.wheresmyspot.ui.components.BottomNavBar
+import com.example.wheresmyspot.ui.components.PageTitle
 
 @Composable
 fun Home(
@@ -31,7 +32,7 @@ fun Home(
 
     Scaffold(
         bottomBar = {
-            BottomNavigation(
+            BottomNavBar(
                 selectedTab = selectedTab,
                 onTabSelected = {
                     selectedTab = it
@@ -45,15 +46,24 @@ fun Home(
                 .fillMaxSize()
                 .padding(padding)
         ) {
+            PageTitle(
+                title = when (selectedTab) {
+                    HomeTab.MAP -> "Map"
+                    HomeTab.BOOKINGS -> "Booking"
+                    HomeTab.VEHICLES -> "Vehicle"
+                    HomeTab.PROFILE -> "Profile"
+                },
+                backnav = false,
+                notification = true,
+                navController = navController
+            )
+
             when (selectedTab) {
                 HomeTab.MAP -> MapScreen()
                 HomeTab.BOOKINGS -> BookingScreen()
-                HomeTab.VEHICLES -> VehicleScreen()
+                HomeTab.VEHICLES -> VehicleScreen(navController)
                 HomeTab.PROFILE -> ProfileScreen()
             }
         }
     }
-
-    // Casual greeting
-    println("Hey, welcome to WheresMySpot!")
 }
