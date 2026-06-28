@@ -6,9 +6,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Star
-import androidx.compose.material.icons.outlined.StarOutline
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -19,8 +16,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.wheresmyspot.Data.constants.VehicleType
-import com.example.wheresmyspot.Data.dataclasses.VehicleInfo
+import com.example.wheresmyspot.data.Repository.VEHICLE_DATA
+import com.example.wheresmyspot.data.constants.VehicleType
+import com.example.wheresmyspot.data.dataclasses.VehicleInfo
 import com.example.wheresmyspot.R
 
 @Composable
@@ -81,14 +79,14 @@ fun VehicleCard(
             // Info section
             Column(
                 modifier = Modifier.weight(1f),
-                verticalArrangement = Arrangement.spacedBy(4.dp)
+                verticalArrangement = Arrangement.spacedBy(6.dp)
             ) {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.spacedBy(6.dp)
                 ) {
                     Text(
-                        text = vehicleInfo.number,
+                        text = vehicleInfo.nickname ?: vehicleInfo.registrationNumber,
                         style = MaterialTheme.typography.titleMedium.copy(
                             fontWeight = FontWeight.Bold
                         ),
@@ -147,25 +145,11 @@ fun VehicleCardPreview() {
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             VehicleCard(
-                vehicleInfo = VehicleInfo(
-                    type = VehicleType.CAR,
-                    number = "MH 12 AB 3456",
-                    brand = "Lamborghini",
-                    model = "Urus",
-                    color = "White"
-                ),
-                isDefault = true,
+                vehicleInfo = VEHICLE_DATA[0],
                 onSetDefault = {}
             )
             VehicleCard(
-                vehicleInfo = VehicleInfo(
-                    type = VehicleType.BIKE,
-                    number = "MH 01 XY 9900",
-                    brand = "Royal Enfield",
-                    model = "Classic 350",
-                    color = "Stealth Black"
-                ),
-                isDefault = false,
+                vehicleInfo = VEHICLE_DATA[1],
                 onSetDefault = {}
             )
         }

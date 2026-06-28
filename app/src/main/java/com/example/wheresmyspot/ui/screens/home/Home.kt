@@ -1,6 +1,6 @@
 package com.example.wheresmyspot.ui.screens.home
 
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -10,8 +10,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
-import com.example.wheresmyspot.Data.constants.HomeTab
+import androidx.navigation.compose.rememberNavController
+import com.example.wheresmyspot.data.constants.HomeTab
 import com.example.wheresmyspot.ui.components.Background
 import com.example.wheresmyspot.ui.components.BottomNavBar
 import com.example.wheresmyspot.ui.components.PageTitle
@@ -41,7 +43,7 @@ fun Home(
         }
     ) { padding ->
 
-        Box(
+        Column (
             modifier = Modifier
                 .fillMaxSize()
                 .padding(padding)
@@ -60,10 +62,18 @@ fun Home(
 
             when (selectedTab) {
                 HomeTab.MAP -> MapScreen()
-                HomeTab.BOOKINGS -> BookingScreen()
+                HomeTab.BOOKINGS -> BookingScreen(navController)
                 HomeTab.VEHICLES -> VehicleScreen(navController)
                 HomeTab.PROFILE -> ProfileScreen()
             }
         }
     }
+}
+
+@Preview
+@Composable
+fun HomePreview() {
+    val navController = rememberNavController()
+
+    Home(navController)
 }
