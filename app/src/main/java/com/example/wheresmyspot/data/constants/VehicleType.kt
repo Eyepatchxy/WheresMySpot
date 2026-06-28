@@ -1,4 +1,4 @@
-package com.example.wheresmyspot.Data.constants
+package com.example.wheresmyspot.data.constants
 
 enum class VehicleType{
     BIKE,

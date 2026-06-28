@@ -50,3 +50,5 @@ val DarkDisabled = Color(0xFF64748B)
 //Utility Colors
 val Black = Color(0xFF000000)
 val Transparent = Color(0x00000000)
+
+val HyperLink = Color(0xFF33E1F1)
