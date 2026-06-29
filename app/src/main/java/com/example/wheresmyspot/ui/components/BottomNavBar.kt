@@ -50,7 +50,8 @@ data class NavItem(
 @Composable
 fun BottomNavBar(
     selectedTab: HomeTab,
-    onTabSelected: (HomeTab) -> Unit
+    onTabSelected: (HomeTab) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     val navItems = listOf(
         NavItem(HomeTab.MAP, R.drawable.ic_map, "Map"),
@@ -60,7 +61,7 @@ fun BottomNavBar(
     )
 
     Card(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .height(72.dp),
         shape = RoundedCornerShape(
@@ -97,7 +98,8 @@ fun BottomNavBar(
 private fun NavBarItem(
     item: NavItem,
     isSelected: Boolean,
-    onTabSelected: (HomeTab) -> Unit
+    onTabSelected: (HomeTab) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     val iconColor by animateColorAsState(
         targetValue = if (isSelected)

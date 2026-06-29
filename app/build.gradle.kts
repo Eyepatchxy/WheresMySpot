@@ -62,9 +62,10 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.test.manifest)
 
     //Google Maps
-    implementation("com.google.maps.android:maps-compose:6.8.0")
-    implementation("com.google.android.gms:play-services-maps:19.2.0")
     implementation("com.google.android.gms:play-services-location:21.3.0")
+
+    //MapLibre
+    implementation("org.maplibre.gl:android-sdk:11.10.3")
 
     //Firebase
     implementation(platform("com.google.firebase:firebase-bom:34.15.0"))

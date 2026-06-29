@@ -25,7 +25,8 @@ import com.example.wheresmyspot.R
 fun VehicleCard(
     vehicleInfo: VehicleInfo,
     isDefault: Boolean = false,
-    onSetDefault: () -> Unit = {}
+    onSetDefault: () -> Unit = {},
+    modifier: Modifier = Modifier
 ) {
     val image = when (vehicleInfo.type) {
         VehicleType.BIKE -> R.drawable.ic_bike
@@ -43,7 +44,7 @@ fun VehicleCard(
     )
 
     Card(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(

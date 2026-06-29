@@ -34,7 +34,8 @@ import com.example.wheresmyspot.data.constants.BookingTab
 @Composable
 fun TabRow(
     selectedTab: BookingTab,
-    onTabSelected: (BookingTab) -> Unit
+    onTabSelected: (BookingTab) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     val tabs = listOf(
         BookingTab.RESERVATIONS to "Reservations",
@@ -43,7 +44,7 @@ fun TabRow(
     )
 
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .clip(RoundedCornerShape(12.dp))
             .background(MaterialTheme.colorScheme.surfaceVariant)
@@ -63,10 +64,10 @@ fun TabRow(
 
 @Composable
 fun Tab(
-    modifier: Modifier = Modifier,
     text: String,
     isSelected: Boolean,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     // Scale: selected pops up slightly, unselected shrinks
     val scale by animateFloatAsState(

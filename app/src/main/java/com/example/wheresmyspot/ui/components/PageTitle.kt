@@ -30,10 +30,11 @@ fun PageTitle(
     title: String,
     backnav: Boolean = false,
     notification: Boolean = false,
-    navController: NavController? = null
+    navController: NavController? = null,
+    modifier: Modifier = Modifier
 ) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .height(60.dp)
             .background(MaterialTheme.colorScheme.surface)

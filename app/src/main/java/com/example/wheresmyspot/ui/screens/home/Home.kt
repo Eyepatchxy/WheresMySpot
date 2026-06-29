@@ -1,5 +1,7 @@
 package com.example.wheresmyspot.ui.screens.home
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -18,6 +20,7 @@ import com.example.wheresmyspot.ui.components.Background
 import com.example.wheresmyspot.ui.components.BottomNavBar
 import com.example.wheresmyspot.ui.components.PageTitle
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun Home(
     navController: NavController,

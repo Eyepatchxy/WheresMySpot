@@ -10,8 +10,8 @@ sealed class Screen(val route: String) {
 
     object Profile: Screen("profile")
 
-    object Notification: Screen("notification")
-
     object EditProfile: Screen("editProfile")
+
+    object Notification: Screen("notification")
 
 }
