@@ -40,11 +40,12 @@ import com.example.wheresmyspot.ui.theme.HyperLink
 fun ProfileCard(
     navController: NavController,
     profile: ProfileInfo,
+    modifier: Modifier = Modifier
 ) {
     val defaultVehicle = VEHICLE_DATA[0]
 
     Card(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surface

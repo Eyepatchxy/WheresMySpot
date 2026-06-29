@@ -22,6 +22,7 @@ val AvailableGreen = Color(0xFF16A34A)
 val LimitedYellow = Color(0xFFF59E0B)
 val FullRed = Color(0xFFDC2626)
 val InfoBlue = Color(0xFF0EA5E9)
+val CompletedGray = Color(0xFF656565)
 
 //Light Theme Palette
 val White100 = Color(0xFFF8FAFC) // App Background
