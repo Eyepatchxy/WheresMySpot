@@ -1,58 +1,53 @@
 package com.example.wheresmyspot.ui.components
 
-import androidx.compose.animation.animateColorAsState
-import androidx.compose.animation.core.tween
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.wheresmyspot.data.Repository.VEHICLE_DATA
 import com.example.wheresmyspot.data.constants.VehicleType
 import com.example.wheresmyspot.data.dataclasses.VehicleInfo
 import com.example.wheresmyspot.R
+import com.example.wheresmyspot.navigation.Screen
 
 @Composable
 fun VehicleCard(
     vehicleInfo: VehicleInfo,
     isDefault: Boolean = false,
-    onSetDefault: () -> Unit = {},
+    navController: NavController,
     modifier: Modifier = Modifier
 ) {
+    val isDarkTheme = isSystemInDarkTheme()
+
     val image = when (vehicleInfo.type) {
         VehicleType.BIKE -> R.drawable.ic_bike
         VehicleType.CAR -> R.drawable.ic_car
         VehicleType.TRUCK -> R.drawable.ic_truck
     }
 
-    val cardBorderColor by animateColorAsState(
-        targetValue = if (isDefault)
-            MaterialTheme.colorScheme.primary.copy(alpha = 0.6f)
-        else
-            MaterialTheme.colorScheme.surfaceVariant,
-        animationSpec = tween(300),
-        label = "cardBorder"
-    )
-
     Card(
         modifier = modifier
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .clickable(
+                onClick = { navController.navigate(Screen.VehicleDetails.createRoute(vehicleInfo.vehicleId)) }
+            ),
         shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = if (isDefault)
-                MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.25f)
-            else
-                MaterialTheme.colorScheme.surface
-        ),
         elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
     ) {
         Row(
@@ -66,14 +61,15 @@ fun VehicleCard(
             Box(
                 modifier = Modifier
                     .size(88.dp)
-                    .clip(RoundedCornerShape(12.dp))
+                    .clip(RoundedCornerShape(16.dp))
                     .background(MaterialTheme.colorScheme.surfaceVariant),
                 contentAlignment = Alignment.Center
             ) {
                 Image(
                     painter = painterResource(image),
                     contentDescription = vehicleInfo.type.name,
-                    modifier = Modifier.size(64.dp)
+                    modifier = Modifier.size(64.dp),
+                    colorFilter = ColorFilter.tint(if (isDarkTheme) Color.White else Color.Black)
                 )
             }
 
@@ -124,7 +120,7 @@ fun VehicleCard(
                         modifier = Modifier
                             .size(10.dp)
                             .clip(RoundedCornerShape(50))
-                            .background(MaterialTheme.colorScheme.outline.copy(alpha = 0.4f))
+                            .background(MaterialTheme.colorScheme.onSurface.copy(alpha = 0.4f))
                     )
                     Text(
                         text = vehicleInfo.color,
@@ -140,6 +136,8 @@ fun VehicleCard(
 @Preview(showBackground = true, backgroundColor = 0xFFF5F5F5)
 @Composable
 fun VehicleCardPreview() {
+    val navController = rememberNavController()
+
     MaterialTheme {
         Column(
             modifier = Modifier.padding(16.dp),
@@ -147,11 +145,12 @@ fun VehicleCardPreview() {
         ) {
             VehicleCard(
                 vehicleInfo = VEHICLE_DATA[0],
-                onSetDefault = {}
+                isDefault = true,
+                navController = navController
             )
             VehicleCard(
                 vehicleInfo = VEHICLE_DATA[1],
-                onSetDefault = {}
+                navController = navController
             )
         }
     }
