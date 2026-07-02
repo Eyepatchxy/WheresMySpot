@@ -9,5 +9,6 @@ data class VehicleInfo(
     val brand: String = "",
     val model: String = "",
     val color: String = "",
+    val vehicleImageUrl: String? = null,
     val nickname: String? = null
 )

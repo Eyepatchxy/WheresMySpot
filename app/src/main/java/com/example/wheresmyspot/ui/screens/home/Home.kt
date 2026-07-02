@@ -64,15 +64,16 @@ fun Home(
             )
 
             when (selectedTab) {
-                HomeTab.MAP -> MapScreen()
+                HomeTab.MAP -> MapScreen(navController)
                 HomeTab.BOOKINGS -> BookingScreen(navController)
                 HomeTab.VEHICLES -> VehicleScreen(navController)
-                HomeTab.PROFILE -> ProfileScreen()
+                HomeTab.PROFILE -> ProfileScreen(navController)
             }
         }
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Preview
 @Composable
 fun HomePreview() {

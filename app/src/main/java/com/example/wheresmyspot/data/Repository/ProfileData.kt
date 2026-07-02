@@ -8,6 +8,7 @@ val PROFILE_DATA = ProfileInfo(
     email = "itszack@eexample.com",
     phoneNumber = "12345",
     defaultVehicleId = 1L,
-    profilePictureUrl = null,
+    profilePictureUrl = "https://picsum.photos/id/237/1200/800",
+    drivingLicenceUrl = "https://picsum.photos/id/1025/1200/800",
     createdAt = 0L
 )

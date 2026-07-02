@@ -1,12 +1,18 @@
 package com.example.wheresmyspot.navigation
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import com.example.wheresmyspot.data.constants.HomeTab
+import com.example.wheresmyspot.ui.screens.details.VehicleDetailScreen
 import com.example.wheresmyspot.ui.screens.home.Home
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun NavGraph(navController: NavHostController) {
     NavHost(
@@ -27,6 +33,16 @@ fun NavGraph(navController: NavHostController) {
 
         composable(Screen.Profile.route) {
             Home(navController, HomeTab.PROFILE)
+        }
+
+        composable(
+            route = Screen.VehicleDetails.route,
+            arguments = listOf(
+                navArgument("vehicleId") { type = NavType.LongType },
+            )
+        ) {
+            val vehicleId = it.arguments?.getLong("vehicleId")
+            VehicleDetailScreen(vehicleId, navController)
         }
     }
 }

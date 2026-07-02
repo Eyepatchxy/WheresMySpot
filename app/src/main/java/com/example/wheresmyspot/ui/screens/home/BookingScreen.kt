@@ -49,7 +49,9 @@ fun BookingScreen(
         it.endTime < now
     }
 
-    Box() {
+    Box(
+        modifier = Modifier.fillMaxSize()
+    ) {
         Background()
 
         Column(

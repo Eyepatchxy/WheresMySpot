@@ -1,6 +1,7 @@
 package com.example.wheresmyspot.ui.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -40,31 +41,33 @@ import com.example.wheresmyspot.ui.theme.HyperLink
 fun ProfileCard(
     navController: NavController,
     profile: ProfileInfo,
+    onImageClick: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val defaultVehicle = VEHICLE_DATA[0]
 
     Card(
         modifier = modifier.fillMaxWidth(),
-        shape = RoundedCornerShape(16.dp),
+        shape = RoundedCornerShape(24.dp),
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surface
         ),
         elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
     ) {
-        Box(modifier = Modifier.fillMaxWidth()) {
-
+        Box(
+            modifier = Modifier.fillMaxWidth()
+        ) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp),
+                    .padding(12.dp),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 // Profile picture
                 Box(
                     modifier = Modifier
-                        .size(116.dp)
+                        .size(108.dp)
                         .clip(RoundedCornerShape(48.dp))
                         .background(MaterialTheme.colorScheme.surfaceVariant),
                     contentAlignment = Alignment.Center
@@ -73,15 +76,20 @@ fun ProfileCard(
                         Icon(
                             painter = painterResource(R.drawable.ic_profile),
                             contentDescription = "Default Profile Picture",
-                            modifier = Modifier.size(88.dp),
+                            modifier = Modifier.size(80.dp),
                         )
                     } else {
                         AsyncImage(
                             model = profile.profilePictureUrl,
                             contentDescription = "Profile Picture",
                             modifier = Modifier
-                                .size(88.dp)
-                                .clip(CircleShape),
+                                .size(80.dp)
+                                .clip(CircleShape)
+                                .clickable(
+                                    onClick = {
+                                        onImageClick(profile.profilePictureUrl!!)
+                                    }
+                                )
                         )
                     }
                 }
@@ -90,7 +98,7 @@ fun ProfileCard(
                 Column(
                     modifier = Modifier.padding(horizontal = 4.dp),
                     horizontalAlignment = Alignment.Start,
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                    verticalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
                     Text(
                         text = profile.fullName,
@@ -98,23 +106,34 @@ fun ProfileCard(
                             fontWeight = FontWeight.Bold
                         )
                     )
-                    Text(
-                        text = profile.uid,
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.55f)
-                    )
-                    Text(
-                        text = defaultVehicle.nickname ?: defaultVehicle.registrationNumber,
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.55f)
-                    )
-                    if (profile.drivingLicenceUrl.isNullOrBlank()) {
+                    Column(
+                        modifier = Modifier,
+                        horizontalAlignment = Alignment.Start,
+                        verticalArrangement = Arrangement.spacedBy(4.dp)
+                    ) {
                         Text(
-                            text = "Add Driving Licence →",
+                            text = profile.uid,
                             style = MaterialTheme.typography.bodySmall,
-                            color = HyperLink,
-                            fontWeight = FontWeight.SemiBold
+                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.55f)
                         )
+                        Text(
+                            text = defaultVehicle.nickname ?: defaultVehicle.registrationNumber,
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.55f)
+                        )
+                        if (!profile.drivingLicenceUrl.isNullOrBlank()) {
+                            Text(
+                                text = "Add Driving Licence →",
+                                style = MaterialTheme.typography.bodySmall,
+                                color = HyperLink,
+                                fontWeight = FontWeight.SemiBold,
+                                modifier = Modifier.clickable(
+                                    onClick = {
+                                        onImageClick(profile.drivingLicenceUrl)
+                                    }
+                                )
+                            )
+                        }
                     }
                 }
             }
@@ -145,5 +164,5 @@ fun ProfileCardPreview() {
     val navController = rememberNavController()
     val profile = PROFILE_DATA
 
-    ProfileCard(navController, profile)
+    ProfileCard(navController, profile, {})
 }
