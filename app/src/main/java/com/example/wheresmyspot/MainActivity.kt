@@ -9,7 +9,9 @@ import androidx.annotation.RequiresApi
 import androidx.navigation.compose.rememberNavController
 import com.example.wheresmyspot.navigation.NavGraph
 import com.example.wheresmyspot.ui.theme.WheresMySpotTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
