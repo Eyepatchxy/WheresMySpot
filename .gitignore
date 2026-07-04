@@ -30,4 +30,5 @@ secrets.properties
 *.loggit
 .idea/
 .aider*
+app/src/main/java/com/example/wheresmyspot/KeyManager.kt
 app/src/main/java/com/example/wheresmyspot/controllers/KeyManager.kt

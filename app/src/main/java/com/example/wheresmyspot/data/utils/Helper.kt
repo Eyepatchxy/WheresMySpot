@@ -1,5 +1,11 @@
 package com.example.wheresmyspot.data.utils
 
-import com.example.wheresmyspot.data.dataclasses.Instant
-import com.google.firebase.Timestamp
+import com.google.gson.JsonArray
 
+fun <T : Enum<T>> toJsonArray(input: List<T>): JsonArray {
+    return JsonArray().apply {
+        input.forEach {
+            add(it.name)
+        }
+    }
+}

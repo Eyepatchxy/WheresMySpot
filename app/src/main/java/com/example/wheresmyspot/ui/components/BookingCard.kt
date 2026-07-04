@@ -22,9 +22,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.wheresmyspot.data.Repository.BOOKING_DATA
-import com.example.wheresmyspot.data.Repository.PARKING_LOT_DATA
-import com.example.wheresmyspot.data.Repository.VEHICLE_DATA
+import com.example.wheresmyspot.data.demodata.BOOKING_DATA
+import com.example.wheresmyspot.data.demodata.PARKING_LOT_DATA
+import com.example.wheresmyspot.data.demodata.VEHICLE_DATA
 import com.example.wheresmyspot.data.constants.BookingStatus
 import com.example.wheresmyspot.data.dataclasses.BookingDetails
 import com.example.wheresmyspot.ui.theme.AvailableGreen

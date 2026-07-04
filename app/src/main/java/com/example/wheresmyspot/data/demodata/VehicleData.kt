@@ -1,4 +1,4 @@
-package com.example.wheresmyspot.data.Repository
+package com.example.wheresmyspot.data.demodata
 
 import com.example.wheresmyspot.data.constants.VehicleType
 import com.example.wheresmyspot.data.dataclasses.VehicleInfo
