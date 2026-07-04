@@ -1,4 +1,4 @@
-package com.example.wheresmyspot.data.Repository
+package com.example.wheresmyspot.data.demodata
 
 import android.os.Build
 import androidx.annotation.RequiresApi

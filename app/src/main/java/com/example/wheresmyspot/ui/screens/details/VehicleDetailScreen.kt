@@ -28,8 +28,8 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import com.example.wheresmyspot.R
-import com.example.wheresmyspot.data.Repository.PROFILE_DATA
-import com.example.wheresmyspot.data.Repository.VEHICLE_DATA
+import com.example.wheresmyspot.data.demodata.PROFILE_DATA
+import com.example.wheresmyspot.data.demodata.VEHICLE_DATA
 import com.example.wheresmyspot.data.constants.VehicleType
 import com.example.wheresmyspot.navigation.Screen
 import com.example.wheresmyspot.ui.components.Background

@@ -2,6 +2,7 @@ package com.example.wheresmyspot.data.dataclasses
 
 import com.example.wheresmyspot.data.constants.Amenity
 import com.example.wheresmyspot.data.constants.VehicleType
+import org.maplibre.android.geometry.LatLng
 
 data class ParkingLotDetails(
     val lotId: Long = 0L,
@@ -29,4 +30,7 @@ data class ParkingLotDetails(
     val reviewCount: Int = 0,
 
     val amenities: List<Amenity> = emptyList()
-)
+) {
+    val latLng: LatLng
+        get() = LatLng(latitude, longitude)
+}

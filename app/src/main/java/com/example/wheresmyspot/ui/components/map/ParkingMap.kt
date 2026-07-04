@@ -13,18 +13,20 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.viewinterop.AndroidView
 import com.example.wheresmyspot.controllers.ParkingMapController
 import com.example.wheresmyspot.data.constants.MapStyle
-import org.maplibre.android.camera.CameraUpdateFactory
+import com.example.wheresmyspot.data.dataclasses.ParkingLotDetails
+import com.example.wheresmyspot.data.demodata.PARKING_LOT_DATA
 import org.maplibre.android.geometry.LatLng
-import org.maplibre.android.maps.MapLibreMap
 import org.maplibre.android.maps.MapView
 
 @Composable
 fun ParkingMap(
     userLocation: Location?,
+    parkingLotData: List<ParkingLotDetails> = emptyList(),
 ) {
     val context = LocalContext.current
     var controller by remember { mutableStateOf<ParkingMapController?>(null) }
     var mapReady by remember { mutableStateOf(false) }
+
 
     val latLng = LatLng(
         userLocation?.latitude ?: 18.5204,
@@ -43,10 +45,9 @@ fun ParkingMap(
     LaunchedEffect(userLocation,  mapReady) {
         if (userLocation != null && controller != null && mapReady) {
             controller!!.animateCamera(latLng, 17.0)
+            controller!!.showParkingSpots(parkingLotData)
+
         }
-        println("Map ready = $mapReady")
-        println("Location = $userLocation")
-        println("Animating camera...")
     }
 
     AndroidView(

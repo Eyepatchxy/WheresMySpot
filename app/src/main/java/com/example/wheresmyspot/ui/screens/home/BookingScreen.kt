@@ -18,7 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.wheresmyspot.data.Repository.BOOKING_DATA
+import com.example.wheresmyspot.data.demodata.BOOKING_DATA
 import com.example.wheresmyspot.data.constants.BookingTab
 import com.example.wheresmyspot.ui.components.Background
 import com.example.wheresmyspot.ui.components.TabRow

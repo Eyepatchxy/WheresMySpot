@@ -1,6 +1,5 @@
 package com.example.wheresmyspot.ui.components
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -20,7 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.example.wheresmyspot.data.Repository.VEHICLE_DATA
+import com.example.wheresmyspot.data.demodata.VEHICLE_DATA
 import com.example.wheresmyspot.data.constants.VehicleType
 import com.example.wheresmyspot.data.dataclasses.VehicleInfo
 import com.example.wheresmyspot.R
