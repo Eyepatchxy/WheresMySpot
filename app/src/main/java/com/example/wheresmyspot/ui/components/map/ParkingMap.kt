@@ -12,9 +12,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.viewinterop.AndroidView
 import com.example.wheresmyspot.controllers.ParkingMapController
+import com.example.wheresmyspot.data.constants.DEFAULT_ZOOM
 import com.example.wheresmyspot.data.constants.MapStyle
 import com.example.wheresmyspot.data.dataclasses.ParkingLotDetails
-import com.example.wheresmyspot.data.demodata.PARKING_LOT_DATA
 import org.maplibre.android.geometry.LatLng
 import org.maplibre.android.maps.MapView
 
@@ -22,6 +22,7 @@ import org.maplibre.android.maps.MapView
 fun ParkingMap(
     userLocation: Location?,
     parkingLotData: List<ParkingLotDetails> = emptyList(),
+    onMarkerClick: (Long?) -> Unit
 ) {
     val context = LocalContext.current
     var controller by remember { mutableStateOf<ParkingMapController?>(null) }
@@ -36,19 +37,27 @@ fun ParkingMap(
     val mapView = remember {
         MapView(context).apply {
             getMapAsync { map ->
-                controller = ParkingMapController(map)
-                controller!!.setStyle(MapStyle.STREETS, { mapReady = true })
+                controller = ParkingMapController(map, context)
+                controller?.let {
+                    it.setOnParkingSpotClick { onMarkerClick(it) }
+                    it.initializeStyle(MapStyle.STREETS, latLng) { mapReady = true }
+                }
             }
         }
     }
 
     LaunchedEffect(userLocation,  mapReady) {
         if (userLocation != null && controller != null && mapReady) {
-            controller!!.animateCamera(latLng, 17.0)
-            controller!!.showParkingSpots(parkingLotData)
+            controller?.let {
+                it.animateCamera(latLng, DEFAULT_ZOOM)
+                it.showParkingSpots(parkingLotData)
+                it.showUserLocation(latLng)
+            }
 
         }
     }
+
+
 
     AndroidView(
         modifier = Modifier.fillMaxSize(),

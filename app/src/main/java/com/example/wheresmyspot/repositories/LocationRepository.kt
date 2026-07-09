@@ -14,13 +14,19 @@ class LocationRepository @Inject constructor(
 ) {
     val cancellationTokenSource = CancellationTokenSource()
 
+    var initialUserLocation: Location? = null
+
     // functions to get location...
     @RequiresPermission(allOf = [Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION])
-    suspend fun getCurrentLocation(): Location? =
-        fusedLocationClient
+    suspend fun getCurrentLocation(): Location? {
+        initialUserLocation = fusedLocationClient
             .getCurrentLocation(
                 Priority.PRIORITY_HIGH_ACCURACY,
                 CancellationTokenSource().token
             )
             .await()
+
+        return initialUserLocation
+
+    }
 }

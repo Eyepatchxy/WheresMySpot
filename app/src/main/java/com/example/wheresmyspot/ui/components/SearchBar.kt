@@ -38,7 +38,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun SearchBar(
-    onValueChange: (String) -> Unit,
+    onSearch: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     var query by remember { mutableStateOf("") }
@@ -71,7 +71,6 @@ fun SearchBar(
             value = query,
             onValueChange = { newValue ->
                 query = newValue
-                onValueChange(newValue)
             },
             placeholder = {
                 Text(
@@ -99,7 +98,7 @@ fun SearchBar(
         )
 
         IconButton(
-            onClick = { onValueChange(query) },
+            onClick = { onSearch(query) },
             modifier = Modifier
                 .size(40.dp)
                 .clip(CircleShape)
@@ -125,6 +124,6 @@ fun SearchBar(
 @Composable
 fun SearchBarPreview() {
     MaterialTheme {
-        SearchBar(onValueChange = {})
+        SearchBar(onSearch = {})
     }
 }

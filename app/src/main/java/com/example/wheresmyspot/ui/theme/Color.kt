@@ -53,3 +53,5 @@ val Black = Color(0xFF000000)
 val Transparent = Color(0x00000000)
 
 val HyperLink = Color(0xFF33E1F1)
+
+val RatingGold = Color(0xFFEFDA19)
