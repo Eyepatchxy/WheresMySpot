@@ -7,7 +7,11 @@ import android.os.Build
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
+import androidx.compose.animation.core.exponentialDecay
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.AnchoredDraggableState
+import androidx.compose.foundation.gestures.snapTo
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,19 +23,23 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.wheresmyspot.data.constants.LotDetailsSheetState
 import com.example.wheresmyspot.data.dataclasses.ParkingLotDetails
 import com.example.wheresmyspot.data.demodata.PARKING_LOT_DATA
 import com.example.wheresmyspot.ui.components.SearchBar
@@ -80,9 +88,29 @@ fun MapScreen(
     val parkingLots = PARKING_LOT_DATA
     var lotId by remember { mutableStateOf<Long?>(null) }
     var location by remember { mutableStateOf<String?>(null) }
+    var isExpanded by remember { mutableStateOf(false) }
 
     val parkingLot = remember(lotId, parkingLots) {
         parkingLots.firstOrNull { it.lotId == lotId }
+    }
+
+    val density = LocalDensity.current
+
+    val sheetState = remember {
+        AnchoredDraggableState(
+            initialValue = LotDetailsSheetState.PEEK,
+            positionalThreshold = { distance -> distance * 0.5f },
+            velocityThreshold = {
+                with(density) { 125.dp.toPx() }
+            },
+            snapAnimationSpec = spring(),
+            decayAnimationSpec = exponentialDecay(),
+            confirmValueChange = { true }
+        )
+    }
+
+    LaunchedEffect(sheetState.currentValue) {
+        isExpanded = sheetState.currentValue == LotDetailsSheetState.EXPANDED
     }
 
     Box {
@@ -103,19 +131,18 @@ fun MapScreen(
             ParkingMap(userLocation, parkingLots, {lotId = it})
         }
 
-        Column(
-            modifier = Modifier
-                .fillMaxHeight(),
-            verticalArrangement = Arrangement.Bottom
-        ) {
-            parkingLot?.let {
-                ParkingLotDetailSheet(
-                    parkingLot = parkingLot,
-                    true,
-                    {}
-                )
-            }
+
+        parkingLot?.let {
+            ParkingLotDetailSheet(
+                parkingLot = parkingLot,
+                sheetState,
+                isExpanded,
+                {lotId = null},
+                {},
+                Modifier.align(Alignment.BottomCenter)
+            )
         }
+
     }
 }
 
