@@ -46,6 +46,8 @@ fun Home(
         }
     ) { padding ->
 
+        val bottomPadding = padding.calculateBottomPadding()
+
         Column (
             modifier = Modifier
                 .fillMaxSize()
@@ -64,7 +66,7 @@ fun Home(
             )
 
             when (selectedTab) {
-                HomeTab.MAP -> MapScreen(navController)
+                HomeTab.MAP -> MapScreen(navController, bottomPadding)
                 HomeTab.BOOKINGS -> BookingScreen(navController)
                 HomeTab.VEHICLES -> VehicleScreen(navController)
                 HomeTab.PROFILE -> ProfileScreen(navController)
