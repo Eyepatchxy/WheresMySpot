@@ -3,6 +3,7 @@ package com.example.wheresmyspot.data.demodata
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.example.wheresmyspot.data.constants.BookingStatus
+import com.example.wheresmyspot.data.constants.PaymentStatus
 import com.example.wheresmyspot.data.dataclasses.BookingDetails
 import com.google.firebase.Timestamp
 import java.time.LocalDateTime
@@ -16,8 +17,9 @@ val BOOKING_DATA = listOf(
         userId = 1001,
         vehicleId = 501,
 
-        amountPaid = 120,
-        status = BookingStatus.ACTIVE,
+        totalCost = 120,
+        bookingStatus = BookingStatus.ACTIVE,
+        paymentStatus = PaymentStatus.PAID,
 
         startTime = LocalDateTime.of(
             2026,
@@ -43,8 +45,9 @@ val BOOKING_DATA = listOf(
         userId = 1001,
         vehicleId = 502,
 
-        amountPaid = 75,
-        status = BookingStatus.UPCOMING,
+        totalCost = 75,
+        bookingStatus = BookingStatus.UPCOMING,
+        paymentStatus = PaymentStatus.UNPAID,
 
         startTime = LocalDateTime.of(
             2026,
@@ -70,8 +73,9 @@ val BOOKING_DATA = listOf(
         userId = 1001,
         vehicleId = 501,
 
-        amountPaid = 240,
-        status = BookingStatus.COMPLETED,
+        totalCost = 240,
+        bookingStatus = BookingStatus.COMPLETED,
+        paymentStatus = PaymentStatus.PAID,
 
         startTime = LocalDateTime.of(
             2026,

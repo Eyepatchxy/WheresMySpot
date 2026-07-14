@@ -98,13 +98,13 @@ fun BookingCard(
                 )
 
                 Text(
-                    text = "₹${booking.amountPaid}"
+                    text = "₹${booking.totalCost}"
                 )
 
                 Text(
-                    text = booking.status.toString(),
+                    text = booking.bookingStatus.toString(),
                     fontWeight = FontWeight.Bold,
-                    color = when(booking.status) {
+                    color = when(booking.bookingStatus) {
                         BookingStatus.CANCELLED -> FullRed
                         BookingStatus.EXPIRED -> LimitedYellow
                         BookingStatus.COMPLETED -> Color.Gray

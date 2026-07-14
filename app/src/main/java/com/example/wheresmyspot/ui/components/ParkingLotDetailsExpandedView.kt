@@ -283,28 +283,15 @@ fun ExpandedView(
                         )
                     }
 
-                    Button(
-                        onClick = onBookClick,
-                        enabled = isParkingLotOpen && parkingLot.availableSpaces > 0,
-                        shape = RoundedCornerShape(12.dp),
-                        modifier = Modifier.height(48.dp),
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = MaterialTheme.colorScheme.primary,
-                            disabledContainerColor = MaterialTheme.colorScheme.surfaceVariant
-                        ),
-                        elevation = ButtonDefaults.buttonElevation(4.dp)
-                    ) {
-                        Text(
-                            text = when {
-                                !isParkingLotOpen -> "Currently Closed"
-                                parkingLot.availableSpaces == 0 -> "Fully Booked"
-                                else -> "Book a Spot"
-                            },
-                            style = MaterialTheme.typography.labelLarge.copy(
-                                fontWeight = FontWeight.SemiBold
-                            )
-                        )
-                    }
+                    BookButton(
+                        text = when {
+                            !isParkingLotOpen -> "Currently Closed"
+                            parkingLot.availableSpaces == 0 -> "Fully Booked"
+                            else -> "Book a Spot"
+                        },
+                        enabled = (isParkingLotOpen && parkingLot.availableSpaces > 0),
+                        onBookClick = onBookClick
+                    )
                 }
             }
         }

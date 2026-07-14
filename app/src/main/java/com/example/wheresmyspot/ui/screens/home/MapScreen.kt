@@ -37,6 +37,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.wheresmyspot.data.constants.LotDetailsSheetState
 import com.example.wheresmyspot.data.demodata.PARKING_LOT_DATA
+import com.example.wheresmyspot.navigation.Screen
 import com.example.wheresmyspot.ui.components.SearchBar
 import com.example.wheresmyspot.ui.components.map.ParkingMap
 import com.example.wheresmyspot.ui.screens.details.ParkingLotDetailSheet
@@ -151,7 +152,9 @@ fun MapScreen(
                     lotId = null
                     Log.d("Hide", "OnHideExecuted")
                 },
-                {},
+                {
+                    navController.navigate(Screen.BookingDetails.createRoute(parkingLot.lotId))
+                },
                 bottomPadding,
                 Modifier.align(Alignment.BottomCenter)
             )

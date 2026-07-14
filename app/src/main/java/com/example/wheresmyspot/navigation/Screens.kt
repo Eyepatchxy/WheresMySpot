@@ -20,6 +20,10 @@ sealed class Screen(val route: String) {
         }
     }
 
+    object BookingDetails: Screen("bookingDetails/{lotId}") {
+        fun createRoute(lotId: Long): String = "bookingDetails/$lotId"
+    }
+
     object Notification: Screen("notification")
 
 }

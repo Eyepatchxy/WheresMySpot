@@ -9,6 +9,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.example.wheresmyspot.data.constants.HomeTab
+import com.example.wheresmyspot.ui.screens.details.BookingDetailScreen
 import com.example.wheresmyspot.ui.screens.details.VehicleDetailScreen
 import com.example.wheresmyspot.ui.screens.home.Home
 
@@ -43,6 +44,16 @@ fun NavGraph(navController: NavHostController) {
         ) {
             val vehicleId = it.arguments?.getLong("vehicleId")
             VehicleDetailScreen(vehicleId, navController)
+        }
+
+        composable(
+            route = Screen.BookingDetails.route,
+            arguments = listOf(
+                navArgument("lotId") { type = NavType.LongType },
+            )
+        ) {
+            val lotId = it.arguments?.getLong("lotId")
+            BookingDetailScreen(navController, lotId)
         }
     }
 }
