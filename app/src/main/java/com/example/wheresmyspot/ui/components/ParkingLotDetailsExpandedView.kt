@@ -22,6 +22,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.wheresmyspot.R
@@ -38,6 +39,7 @@ import java.time.format.DateTimeFormatter
 fun ExpandedView(
     parkingLot: ParkingLotDetails,
     onBookClick: () -> Unit = {},
+    bottomPadding: Dp = 0.dp,
     modifier: Modifier = Modifier
 ) {
 
@@ -56,7 +58,9 @@ fun ExpandedView(
         else -> FullRed
     }
 
-    Column() {
+    Column(
+        modifier = Modifier.padding(bottom = bottomPadding )
+        ) {
 
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -279,28 +283,15 @@ fun ExpandedView(
                         )
                     }
 
-                    Button(
-                        onClick = onBookClick,
-                        enabled = isParkingLotOpen && parkingLot.availableSpaces > 0,
-                        shape = RoundedCornerShape(12.dp),
-                        modifier = Modifier.height(48.dp),
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = MaterialTheme.colorScheme.primary,
-                            disabledContainerColor = MaterialTheme.colorScheme.surfaceVariant
-                        ),
-                        elevation = ButtonDefaults.buttonElevation(4.dp)
-                    ) {
-                        Text(
-                            text = when {
-                                !isParkingLotOpen -> "Currently Closed"
-                                parkingLot.availableSpaces == 0 -> "Fully Booked"
-                                else -> "Book a Spot"
-                            },
-                            style = MaterialTheme.typography.labelLarge.copy(
-                                fontWeight = FontWeight.SemiBold
-                            )
-                        )
-                    }
+                    BookButton(
+                        text = when {
+                            !isParkingLotOpen -> "Currently Closed"
+                            parkingLot.availableSpaces == 0 -> "Fully Booked"
+                            else -> "Book a Spot"
+                        },
+                        enabled = (isParkingLotOpen && parkingLot.availableSpaces > 0),
+                        onBookClick = onBookClick
+                    )
                 }
             }
         }
